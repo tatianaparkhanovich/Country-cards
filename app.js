@@ -1,6 +1,6 @@
 const row = document.querySelector(".row");
 
-const renderCard = (svg, name, region, population, languages, curString) => {
+const renderCard = (svg, name, region, myFixedNumber, languages, curString) => {
   row.insertAdjacentHTML(
     "beforeend",
     `<div class="col">
@@ -11,7 +11,7 @@ const renderCard = (svg, name, region, population, languages, curString) => {
               <p class="card-text">
                 ${region}
               </p>
-              <p class="card-text">👪 ${population}</p>
+              <p class="card-text">👪 ${myFixedNumber}</p>
               <p class="card-text">🤑${languages} </p>
                <p class="card-text">💲${curString} </p>
             </div>
@@ -30,6 +30,8 @@ fetch("https://restcountries.com/v3.1/all")
         const name = el.name.common;
         const region = el.region;
         const population = el.population;
+        let myFixedNumber = (el.population / 1000000).toFixed(1) + " млн";
+        console.log(myFixedNumber);
 
         const languages = el.languages
           ? Object.values(el.languages).join(",")
@@ -38,7 +40,7 @@ fetch("https://restcountries.com/v3.1/all")
         const curString = currencies.length
           ? currencies.map((el) => el.name + " " + el.symbol).join(", ")
           : "-";
-        renderCard(image, name, region, population, languages, curString);
+        renderCard(image, name, region, myFixedNumber, languages, curString);
       }
     });
   });
