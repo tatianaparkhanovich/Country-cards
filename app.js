@@ -31,8 +31,6 @@ fetch("https://restcountries.com/v3.1/all")
         const region = el.region;
         const population = el.population;
         let myFixedNumber = (el.population / 1000000).toFixed(1) + " млн";
-        console.log(myFixedNumber);
-
         const languages = el.languages
           ? Object.values(el.languages).join(",")
           : "-";
